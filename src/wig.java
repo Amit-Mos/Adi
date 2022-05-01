@@ -21,7 +21,7 @@ public class wig {
         }
     }
 
-    public static int getSizeOfCube() {
+    public int getSizeOfCube() {
         return sizeOfCube;
     }
 
@@ -33,7 +33,11 @@ public class wig {
         wig.sizeOfCube = sizeOfCube;
     }
 
-    public void setWigColors(boolean isRow, int numOfRowOrColumn, Color[] rowOrColumnColor) {
+    public void setWigColors(Color[][] wigColors) {
+        this.wigColors = wigColors;
+    }
+
+    public void rotateSide(boolean isRow, int numOfRowOrColumn, Color[] rowOrColumnColor) {
         if (isRow) {
             for (int i = 0; i < this.sizeOfCube; i++) {
                 this.wigColors[numOfRowOrColumn][i] = rowOrColumnColor[i];
@@ -51,19 +55,15 @@ public class wig {
 
         for (int i = 0; i < this.sizeOfCube; i++) {
             for (int j = 0; j < this.sizeOfCube; j++) {
-                new_wigColors[this.sizeOfCube - 1 - j][this.sizeOfCube - 1 - i] = this.wigColors[i][j];
+                if (dirFlag){
+                    new_wigColors[this.sizeOfCube - 1 - j][this.sizeOfCube - 1 - i] = this.wigColors[i][j];
+                }
+                else{
+                    new_wigColors[j][i] = this.wigColors[i][j];
+                }
             }
         }
+        this.wigColors = new_wigColors;
     }
-
-    public void printWig() {
-        for (int i = 0; i < this.sizeOfCube; i++) {
-            for (int j = 0; j < this.sizeOfCube; j++) {
-                System.out.print(this.wigColors[i][j]. + " ");
-            }
-            System.out.println();
-        }
-    }
-
 
 }
